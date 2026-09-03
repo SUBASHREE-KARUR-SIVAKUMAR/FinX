@@ -1,0 +1,4 @@
+memcode-sdk
+fastapi
+uvicorn
+prophet
