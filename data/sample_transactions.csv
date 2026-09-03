@@ -1,0 +1,31 @@
+date,amount,type,category,source
+2026-08-01,950,income,Gig earnings,SWIGGY_MOCK
+2026-08-02,1100,income,Gig earnings,SWIGGY_MOCK
+2026-08-03,700,income,Gig earnings,SWIGGY_MOCK
+2026-08-04,1250,income,Gig earnings,SWIGGY_MOCK
+2026-08-05,980,income,Gig earnings,SWIGGY_MOCK
+2026-08-06,1400,income,Gig earnings,SWIGGY_MOCK
+2026-08-07,820,income,Gig earnings,SWIGGY_MOCK
+2026-08-08,1150,income,Gig earnings,SWIGGY_MOCK
+2026-08-09,900,income,Gig earnings,SWIGGY_MOCK
+2026-08-10,1300,income,Gig earnings,SWIGGY_MOCK
+2026-08-11,760,income,Gig earnings,SWIGGY_MOCK
+2026-08-12,1450,income,Gig earnings,SWIGGY_MOCK
+2026-08-13,920,income,Gig earnings,SWIGGY_MOCK
+2026-08-14,1180,income,Gig earnings,SWIGGY_MOCK
+2026-08-15,850,income,Gig earnings,SWIGGY_MOCK
+2026-08-01,300,expense,Fuel,AA
+2026-08-02,180,expense,Food,AA
+2026-08-03,420,expense,Fuel,AA
+2026-08-04,250,expense,Bills,AA
+2026-08-05,190,expense,Food,AA
+2026-08-06,350,expense,Fuel,AA
+2026-08-07,220,expense,Transport,AA
+2026-08-08,280,expense,Fuel,AA
+2026-08-09,170,expense,Food,AA
+2026-08-10,300,expense,Bills,AA
+2026-08-11,450,expense,Fuel,AA
+2026-08-12,210,expense,Food,AA
+2026-08-13,390,expense,Fuel,AA
+2026-08-14,240,expense,Transport,AA
+2026-08-15,200,expense,Food,AA
