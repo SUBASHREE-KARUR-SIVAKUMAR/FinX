@@ -1,38 +1,32 @@
+# backend/app/api/scenarios.py
+
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from ..database import get_db
-from ..schemas import WhatIfRequest
-from ..services.financial_engine import build_dashboard
+from pydantic import BaseModel
 
-router = APIRouter(prefix="/api/what-if", tags=["what-if"])
+router = APIRouter()
 
-@router.post("/{user_id}")
-def what_if(user_id: int, request: WhatIfRequest, db: Session = Depends(get_db)):
-    dashboard = build_dashboard(db, user_id)
-    base = dashboard["user"]["balance"]
-    forecast_income = sum(x["predicted"] for x in dashboard["forecast"])
+class CommunityJoinRequest(BaseModel):
+    user_id: str
+    contribution_percent: float # User chooses 2% to 5%
 
-    # Approximate expense forecast from the dashboard's safety metrics.
-    baseline = base + forecast_income - dashboard["safety_floor"]
-    adjusted_income = forecast_income * (1 + request.income_change_pct / 100)
-    work_loss = adjusted_income * min(request.days_unable_to_work / 7, 1)
-    projected = max(-100000, baseline + adjusted_income - forecast_income - work_loss - request.unexpected_expense)
+# Mocking a global pool for the hackathon demo
+COMMUNITY_POOL = 15450.00 # Example: total money collected from all workers
 
-    baseline_risk = dashboard["stress_probability"]
-    scenario_risk = min(99, max(1, baseline_risk + (request.unexpected_expense / 100) + max(0, -request.income_change_pct) * 0.7 + request.days_unable_to_work * 4))
-
-    if scenario_risk >= 70:
-        recommendation = "Protect liquidity: postpone discretionary spending and avoid unnecessary new debt."
-    elif projected < dashboard["safety_floor"]:
-        recommendation = "Increase the emergency buffer before making non-essential purchases."
-    else:
-        recommendation = "Scenario remains within the current safety range."
-
+@router.get("/community-status")
+def get_community_status():
     return {
-        "baseline_balance": round(base, 2),
-        "projected_balance": round(projected, 2),
-        "baseline_risk": round(baseline_risk, 1),
-        "scenario_risk": round(scenario_risk, 1),
-        "impact": round(projected - base, 2),
-        "recommendation": recommendation,
+        "total_pool": COMMUNITY_POOL,
+        "active_members": 42,
+        "your_weekly_contribution": "₹120 - ₹300"
     }
+
+@router.post("/request-emergency-payout")
+def request_payout(user_id: str, amount: float, reason: str):
+    # Logic: In a real app, this would need community voting
+    # For the demo, we'll approve it if it's under a certain threshold
+    if amount < 5000:
+        return {
+            "status": "Approved",
+            "message": f"Emergency fund of ₹{amount} is being transferred to your account for {reason}."
+        }
+    return {"status": "Pending", "message": "Your request is under review by the Circle."}

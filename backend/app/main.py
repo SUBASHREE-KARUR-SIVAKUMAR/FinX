@@ -10,6 +10,14 @@ from .api.recommendations import router as recommendations_router
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Allows all origins for the hackathon
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.add_middleware(
     CORSMiddleware,
